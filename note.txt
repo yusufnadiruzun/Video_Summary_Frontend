@@ -1,0 +1,33 @@
+{/* Purchase Modal */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 flex items-center justify-center z-50">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black" onClick={() => setShowModal(false)} />
+            <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} className="bg-white p-8 rounded-xl shadow-2xl z-10 max-w-5xl w-full text-center grid md:grid-cols-3 gap-6">
+              {packages.map((pkg, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`bg-gradient-to-br ${pkg.color} rounded-xl p-6 flex flex-col justify-between`}
+                >
+                  <div className="flex items-center justify-center mb-4 text-3xl">{pkg.icon}</div>
+                  <h3 className="text-xl font-bold mb-4">{pkg.name}</h3>
+                  <ul className="text-left mb-6 list-disc list-inside text-gray-800 space-y-2">
+                    {pkg.features.map((f, idx) => (
+                      <motion.li key={idx} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0, transition: { delay: idx * 0.2 } }} className="flex items-start space-x-2">
+                        <span className="text-indigo-600 text-lg">✔</span>
+                        <span>{f}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                  <p className="text-gray-800 font-semibold mb-4">{pkg.price}</p>
+                  <button onClick={() => handleBuyPackage(pkg.name)} className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition font-semibold">
+                    Buy Now
+                  </button>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
