@@ -1,11 +1,14 @@
 // App.jsx
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Sign/Home";
 import ProUpgrade from "./pages/Sign/ProUpgrade";
 import Channel from "./pages/Sign/Channels";
 import SignIn from "./pages/Sign/SignIn";
 import SignUp from "./pages/Sign/SignUp";
+
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [purchasedPackages, setPurchasedPackages] = useState([]);
@@ -13,36 +16,42 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Auth */}
+        {/* Auth Routes */}
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
 
-        {/* Main App */}
+        {/* Protected Routes */}
         <Route
           path="/"
           element={
-            <Home
-              purchasedPackages={purchasedPackages}
-              setPurchasedPackages={setPurchasedPackages}
-            />
+            <ProtectedRoute>
+              <Home
+                purchasedPackages={purchasedPackages}
+                setPurchasedPackages={setPurchasedPackages}
+              />
+            </ProtectedRoute>
           }
         />
 
-        {/* Pro Upgrade Page */}
         <Route
           path="/pro-upgrade"
           element={
-            <ProUpgrade
-              purchasedPackages={purchasedPackages}
-              setPurchasedPackages={setPurchasedPackages}
-            />
+            <ProtectedRoute>
+              <ProUpgrade
+                purchasedPackages={purchasedPackages}
+                setPurchasedPackages={setPurchasedPackages}
+              />
+            </ProtectedRoute>
           }
         />
 
-        {/* Channel Page */}
         <Route
           path="/channel"
-          element={<Channel purchasedPackages={purchasedPackages} />}
+          element={
+            <ProtectedRoute>
+              <Channel purchasedPackages={purchasedPackages} />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </Router>

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const ProUpgrade = ({ purchasedPackages, setPurchasedPackages }) => {
+  
   const [selectedOption, setSelectedOption] = useState("");
   const [contactInfo, setContactInfo] = useState("");
   const [error, setError] = useState("");
