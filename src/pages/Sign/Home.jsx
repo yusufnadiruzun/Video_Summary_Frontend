@@ -66,7 +66,7 @@ const Home = () => {
   const handleGetSummary = async () => {
     if (!videoId) return;
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc2MzMxNjQ5OCwiZXhwIjoxNzYzOTIxMjk4fQ.DGXag-ZK_-jtYUwGPuoXEOh1Hplc_oo46WlHv4Z4k88";
+    const token = localStorage.getItem("token");
     console.log("Retrieved token:", token);
     if (!token) {
       setError("Please login first.");
