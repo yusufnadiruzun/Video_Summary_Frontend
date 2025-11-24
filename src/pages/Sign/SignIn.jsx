@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:3000"; // Backend adresin
-
+const API_URL = "https://kdemir.com"; // Backend adresin
+//const API_URL = "http://localhost:3000"; // Backend adresin
 let googleInitialized = false; // Google init sadece 1 kez çalışacak
 
 const SignIn = () => {
@@ -74,7 +74,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -102,6 +102,7 @@ const SignIn = () => {
     try {
       const res = await fetch(`${API_URL}/api/auth/guest`, {
         method: "POST",
+        credentials: 'include', // cookie gönder
       });
 
       const data = await res.json();

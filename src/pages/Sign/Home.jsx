@@ -37,6 +37,7 @@ const Home = () => {
   const [purchasedPackages, setPurchasedPackages] = useState([]);
   const [showNotificationHint, setShowNotificationHint] = useState(false);
 
+  const API_URL = "https://kdemir.com"; // Backend adresin
   const navigate = useNavigate();
 
   const extractYouTubeId = (url) => {
@@ -78,7 +79,7 @@ const Home = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3000/api/video/summary", {
+      const response = await fetch(`${API_URL}/api/video/summary`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
